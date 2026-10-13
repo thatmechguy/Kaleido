@@ -1,0 +1,31 @@
+-- Kaleido — generated WezTerm colors. Do not edit by hand.
+-- Usage: config.colors = dofile(wezterm.config_dir .. '/kaleido.lua')
+return {
+  foreground = "{{ colors.terminal_foreground.default.hex }}",
+  background = "{{ colors.terminal_background.default.hex }}",
+  cursor_bg = "{{ colors.terminal_cursor.default.hex }}",
+  cursor_fg = "{{ colors.terminal_cursor_text.default.hex }}",
+  cursor_border = "{{ colors.terminal_cursor.default.hex }}",
+  selection_bg = "{{ colors.terminal_selection_bg.default.hex }}",
+  selection_fg = "{{ colors.terminal_selection_fg.default.hex }}",
+  ansi = {
+    "{{ colors.terminal_normal_black.default.hex }}",
+    "{{ colors.terminal_normal_red.default.hex }}",
+    "{{ colors.terminal_normal_green.default.hex }}",
+    "{{ colors.terminal_normal_yellow.default.hex }}",
+    "{{ colors.terminal_normal_blue.default.hex }}",
+    "{{ colors.terminal_normal_magenta.default.hex }}",
+    "{{ colors.terminal_normal_cyan.default.hex }}",
+    "{{ colors.terminal_normal_white.default.hex }}",
+  },
+  brights = {
+    "{{ colors.terminal_bright_black.default.hex }}",
+    "{{ colors.terminal_bright_red.default.hex }}",
+    "{{ colors.terminal_bright_green.default.hex }}",
+    "{{ colors.terminal_bright_yellow.default.hex }}",
+    "{{ colors.terminal_bright_blue.default.hex }}",
+    "{{ colors.terminal_bright_magenta.default.hex }}",
+    "{{ colors.terminal_bright_cyan.default.hex }}",
+    "{{ colors.terminal_bright_white.default.hex }}",
+  },
+}

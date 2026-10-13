@@ -1,8 +1,8 @@
 /*
  * preferencesPage.js
  *
- * This file is part of ChromaLeon GNOME Shell Extension.
- * https://github.com/Fabito02/ChromaLeon
+ * This file is part of Kaleido GNOME Shell Extension.
+ * https://github.com/thatmechguy/Kaleido
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ import GLib from "gi://GLib";
 import Gtk from "gi://Gtk";
 import GObject from "gi://GObject";
 import Pango from "gi://Pango";
-import { _ } from "../chromaleon.js";
+import { _ } from "../kaleido.js";
 
 export class PreferencesPage extends Adw.PreferencesPage {
   static {
@@ -74,9 +74,9 @@ export class PreferencesPage extends Adw.PreferencesPage {
       halign: Gtk.Align.CENTER,
     });
 
-    const titleSupport = _("ChromaLeon only exists thanks to users like you!");
+    const titleSupport = _("Kaleido only exists thanks to users like you!");
     const contentSupport = _(
-      "If ChromaLeon has earned a place in your device's customization, consider helping the project move forward by making a small donation.",
+      "If Kaleido has earned a place in your device's customization, consider helping the project move forward by making a small donation.",
     );
 
     const label = new Gtk.Label({
@@ -392,7 +392,7 @@ export class PreferencesPage extends Adw.PreferencesPage {
     const customCssRow = new Adw.ActionRow({
       title: _("Custom stylesheet"),
       subtitle: _(
-        "A file that overrides the CSS of the shell and user extensions, with support for ChromaLeon accent colors.",
+        "A file that overrides the CSS of the shell and user extensions, with support for Kaleido accent colors.",
       ),
     });
 
@@ -431,7 +431,7 @@ export class PreferencesPage extends Adw.PreferencesPage {
         heading: _("About the custom stylesheet"),
         body: _(
           "This file is used to apply custom CSS to GNOME Shell.\n\n" +
-            "The extension processes all content within this file, replacing the <b><tt>@@ACCENT@@</tt></b> and <b><tt>-st-accent-color</tt></b> variables with the color selected in the ChromaLeon settings before applying them to the system. This can be useful if an extension does not have the accent colors applied correctly.\n\n" +
+            "The extension processes all content within this file, replacing the <b><tt>@@ACCENT@@</tt></b> and <b><tt>-st-accent-color</tt></b> variables with the color selected in the Kaleido settings before applying them to the system. This can be useful if an extension does not have the accent colors applied correctly.\n\n" +
             "<b>Tip:</b> If your changes do not take effect, try adding <b><tt>!important</tt></b> to your CSS rules.",
         ),
         body_use_markup: true,
@@ -447,7 +447,7 @@ export class PreferencesPage extends Adw.PreferencesPage {
     openCssButton.connect("clicked", () => {
       const homeDir = GLib.get_home_dir();
       const file = Gio.File.new_for_path(
-        `${homeDir}/.config/ChromaLeon/custom.css`,
+        `${homeDir}/.config/Kaleido/custom.css`,
       );
       const uri = file.get_uri();
 

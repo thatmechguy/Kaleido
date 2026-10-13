@@ -1,8 +1,8 @@
 /*
  * recolorUtils.js
  *
- * This file is part of ChromaLeon GNOME Shell Extension.
- * https://github.com/Fabito02/ChromaLeon
+ * This file is part of Kaleido GNOME Shell Extension.
+ * https://github.com/thatmechguy/Kaleido
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -356,7 +356,7 @@ export async function applyAccentTheme(baseColor, options = {}, cancellable) {
     GLib.get_user_data_dir(),
     "icons",
   ]);
-  const targetDir = GLib.build_filenamev([userIconsDir, "ChromaLeon"]);
+  const targetDir = GLib.build_filenamev([userIconsDir, "Kaleido"]);
   const targetDirFile = Gio.File.new_for_path(targetDir);
   let inheritsChain = "Adwaita,AdwaitaLegacy,hicolor";
 
@@ -481,7 +481,7 @@ export async function applyAccentTheme(baseColor, options = {}, cancellable) {
     "ca.desrt.dconf-editor.svg",
     "com.mattjakeman.ExtensionManager.svg",
     "page.tesk.Refine.svg",
-    "io.github.Fabito02.chromaleon.svg",
+    "io.github.thatmechguy.kaleido.svg",
   ];
 
   if (applyApps) {
@@ -589,7 +589,7 @@ export async function applyAccentTheme(baseColor, options = {}, cancellable) {
       "62a0ea": colorMap["62a0ea"],
       "99c1f1": colorMap["99c1f1"],
     },
-    "io.github.Fabito02.chromaleon.svg": {
+    "io.github.thatmechguy.kaleido.svg": {
       "33e281": modifyColor(baseColor, 0.08, 0.02),
       "59e99a": modifyColor(baseColor, 0.18, 0.04),
       "2dbe6e": modifyColor(baseColor, 0.0, 0.0),
@@ -664,8 +664,8 @@ export async function applyAccentTheme(baseColor, options = {}, cancellable) {
   if (applyApps) directories.push("scalable/apps");
 
   let indexContent = `[Icon Theme]
-Name=ChromaLeon
-Comment=Dynamic icon theme with ChromaLeon accent colors
+Name=Kaleido
+Comment=Dynamic icon theme with Kaleido accent colors
 Inherits=${inheritsChain}
 Hidden=true
 
@@ -718,17 +718,17 @@ Type=Scalable
       timeoutId = null;
     }
 
-    if (settings.get_string("icon-theme") === "ChromaLeon") {
+    if (settings.get_string("icon-theme") === "Kaleido") {
       settings.set_string("icon-theme", "Adwaita");
 
       timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 200, () => {
-        settings.set_string("icon-theme", "ChromaLeon");
+        settings.set_string("icon-theme", "Kaleido");
         timeoutId = null;
         resolve();
         return GLib.SOURCE_REMOVE;
       });
     } else {
-      settings.set_string("icon-theme", "ChromaLeon");
+      settings.set_string("icon-theme", "Kaleido");
       resolve();
     }
   });

@@ -11,7 +11,7 @@ msgstr ""
 "PO-Revision-Date: 2026-10-03 09:51+0000\n"
 "Last-Translator: lein <cayin0219@outlook.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
-"projects/chromaleon/extension/zh_Hans/>\n"
+"projects/kaleido/extension/zh_Hans/>\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,27 +19,27 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 2026.10.1.dev0\n"
 
-#: chromaleon.js:125
-msgid "A new version of ChromaLeon Preload is available."
-msgstr "ChromaLeon Preload 有新版本可用。"
+#: kaleido.js:125
+msgid "A new version of Kaleido Preload is available."
+msgstr "Kaleido Preload 有新版本可用。"
 
-#: chromaleon.js:126
+#: kaleido.js:126
 msgid "Update"
 msgstr "更新"
 
-#: chromaleon.js:164
+#: kaleido.js:164
 msgid "User Themes incompatibility warning."
 msgstr "User Themes 扩展不兼容警告。"
 
-#: chromaleon.js:166
+#: kaleido.js:166
 msgid ""
-"ChromaLeon is incompatible with the User Themes extension. Keep the User "
+"Kaleido is incompatible with the User Themes extension. Keep the User "
 "Themes extension disabled to avoid visual conflicts and unexpected behavior."
 msgstr ""
-"ChromaLeon 与 User Themes 扩展不兼容。请确保 User Themes 扩展已禁用，避免出现"
+"Kaleido 与 User Themes 扩展不兼容。请确保 User Themes 扩展已禁用，避免出现"
 "显示冲突和异常行为。"
 
-#: chromaleon.js:170
+#: kaleido.js:170
 msgid "I understood"
 msgstr "我已知晓"
 
@@ -48,14 +48,14 @@ msgid "Preferences"
 msgstr "首选项"
 
 #: ui/preferencesPage.js:77
-msgid "ChromaLeon only exists thanks to users like you!"
-msgstr "ChromaLeon 的存续离不开像您一样的用户！"
+msgid "Kaleido only exists thanks to users like you!"
+msgstr "Kaleido 的存续离不开像您一样的用户！"
 
 #: ui/preferencesPage.js:79
 msgid ""
-"If ChromaLeon has earned a place in your device's customization, consider "
+"If Kaleido has earned a place in your device's customization, consider "
 "helping the project move forward by making a small donation."
-msgstr "若你喜欢用 ChromaLeon 个性化界面，欢迎小额捐赠以支持项目持续开发。"
+msgstr "若你喜欢用 Kaleido 个性化界面，欢迎小额捐赠以支持项目持续开发。"
 
 #: ui/preferencesPage.js:140
 msgid "Colors"
@@ -209,9 +209,9 @@ msgstr "自定义样式表"
 #: ui/preferencesPage.js:395
 msgid ""
 "A file that overrides the CSS of the shell and user extensions, with support "
-"for ChromaLeon accent colors."
+"for Kaleido accent colors."
 msgstr ""
-"该文件可覆盖 Shell 与用户扩展的样式（CSS），支持使用 ChromaLeon 强调色变量。"
+"该文件可覆盖 Shell 与用户扩展的样式（CSS），支持使用 Kaleido 强调色变量。"
 
 #: ui/preferencesPage.js:414 ui/preferencesPage.js:431
 #: ui/preferencesPage.js:491
@@ -228,7 +228,7 @@ msgid ""
 "\n"
 "The extension processes all content within this file, replacing the "
 "<b><tt>@@ACCENT@@</tt></b> and <b><tt>-st-accent-color</tt></b> variables "
-"with the color selected in the ChromaLeon settings before applying them to "
+"with the color selected in the Kaleido settings before applying them to "
 "the system. This can be useful if an extension does not have the accent "
 "colors applied correctly.\n"
 "\n"
@@ -238,7 +238,7 @@ msgstr ""
 "该文件用于向 GNOME Shell 加载自定义 CSS。\n"
 "\n"
 "扩展会预处理文件内全部内容：在样式应用至系统前，将变量 <b><tt>@@ACCENT@@</"
-"tt></b> 与 <b><tt>-st-accent-color</tt></b> 替换为你在 ChromaLeon 设置中选定"
+"tt></b> 与 <b><tt>-st-accent-color</tt></b> 替换为你在 Kaleido 设置中选定"
 "的强调色。该功能可修复部分扩展强调色渲染异常的问题。\n"
 "\n"
 "<b>提示：</b> 若修改未生效，可尝试在 CSS 规则中添加 <b><tt>!important</tt></"
@@ -384,9 +384,9 @@ msgstr "目标应用"
 #: ui/preloadPage.js:221
 msgid ""
 "Enter the process name (e.g., firefox, thunderbird, zen-browser) to apply "
-"the ChromaLeon accent color."
+"the Kaleido accent color."
 msgstr ""
-"输入进程名（如 firefox，thunderbird，zen-browser）以应用 ChromaLeon 强调色。"
+"输入进程名（如 firefox，thunderbird，zen-browser）以应用 Kaleido 强调色。"
 
 #: ui/preloadPage.js:227
 msgid "Add Application"
@@ -403,10 +403,10 @@ msgstr "此选项需要额外配置。"
 #: ui/preloadPage.js:332
 msgid ""
 "To synchronize accent colors with applications that do not support "
-"ChromaLeon colors, the preload library must be compiled and installed (this "
+"Kaleido colors, the preload library must be compiled and installed (this "
 "is not necessary if using GNOME colors)."
 msgstr ""
-"若要让不支持 ChromaLeon 的应用同步强调色，必须编译并安装预加载库（使用 GNOME "
+"若要让不支持 Kaleido 的应用同步强调色，必须编译并安装预加载库（使用 GNOME "
 "强调色则无需此操作）。"
 
 #: ui/preloadPage.js:372
@@ -496,8 +496,8 @@ msgstr "选择颜色"
 #~ "The system automatically updates the accent color based on your wallpaper."
 #~ msgstr "系统将依据背景自动更新强调色。"
 
-#~ msgid "Thank you for supporting the work behind ChromaLeon!"
-#~ msgstr "感谢你支持 ChromaLeon 的开发工作！"
+#~ msgid "Thank you for supporting the work behind Kaleido!"
+#~ msgstr "感谢你支持 Kaleido 的开发工作！"
 
 #~ msgid "Support"
 #~ msgstr "支持"
@@ -505,8 +505,8 @@ msgstr "选择颜色"
 #~ msgid "Support the project"
 #~ msgstr "支持本项目"
 
-#~ msgid "Why support ChromaLeon?"
-#~ msgstr "为什么支持 ChromaLeon？"
+#~ msgid "Why support Kaleido?"
+#~ msgstr "为什么支持 Kaleido？"
 
 #~ msgid ""
 #~ "Developing free software requires time, energy, and dedication. Your "

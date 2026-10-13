@@ -1,0 +1,45 @@
+/* Kaleido — generated stylesheet for Waybar. Do not edit by hand.
+ * Import with: @import "kaleido.css"; */
+
+@define-color pm_bg        {{ colors.surface.default.hex }};
+@define-color pm_fg        {{ colors.on_surface.default.hex }};
+@define-color pm_primary   {{ colors.primary.default.hex }};
+@define-color pm_on_primary {{ colors.on_primary.default.hex }};
+@define-color pm_surface   {{ colors.surface_container.default.hex }};
+@define-color pm_outline   {{ colors.outline.default.hex }};
+@define-color pm_error     {{ colors.error.default.hex }};
+
+window#waybar {
+    background-color: @pm_bg;
+    color: @pm_fg;
+}
+
+window#waybar > box {
+    border-color: @pm_primary;
+}
+
+#workspaces button {
+    color: @pm_fg;
+}
+
+#workspaces button.active,
+#workspaces button.focused {
+    background-color: @pm_primary;
+    color: @pm_on_primary;
+}
+
+#workspaces button.urgent {
+    background-color: @pm_error;
+}
+
+#clock,
+#cpu,
+#memory,
+#network,
+#battery,
+#pulseaudio,
+#tray {
+    background-color: @pm_surface;
+    color: @pm_fg;
+    border-color: @pm_outline;
+}

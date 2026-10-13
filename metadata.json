@@ -1,15 +1,11 @@
 {
-  "name": "ChromaLeon",
-  "description": "Change your system accent colors dynamically based on your wallpaper.\n\nAdapt your GNOME Shell, Adwaita apps, adw-gtk3, and folder/app icons like a chameleon.",
-  "uuid": "user-accent-colors@fabito02",
-  "url": "https://github.com/Fabito02/ChromaLeon",
+  "name": "Kaleido",
+  "description": "Change your system accent colors dynamically based on your wallpaper, and propagate the resulting palette to your applications.\n\nAdapt your GNOME Shell, Adwaita apps, adw-gtk3, folder/app icons, terminals, editors, launchers and more.",
+  "uuid": "kaleido@thatmechguy",
+  "url": "https://github.com/thatmechguy/Kaleido",
   "shell-version": ["48", "49", "50", "51"],
   "session-modes": ["user", "unlock-dialog"],
-  "settings-schema": "org.gnome.shell.extensions.chromaleon",
-  "gettext-domain": "chromaleon",
-  "donations": {
-    "github": "Fabito02",
-    "kofi": "fabito02"
-  },
-  "version-name": "2.4.2"
+  "settings-schema": "org.gnome.shell.extensions.kaleido",
+  "gettext-domain": "kaleido",
+  "version-name": "3.0.0"
 }

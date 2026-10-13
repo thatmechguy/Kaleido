@@ -1,8 +1,8 @@
 /*
  * cacheUtils.js
  *
- * This file is part of ChromaLeon GNOME Shell Extension.
- * https://github.com/Fabito02/ChromaLeon
+ * This file is part of Kaleido GNOME Shell Extension.
+ * https://github.com/thatmechguy/Kaleido
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ import { writeFile, readFile } from "./fileUtils.js";
 import { throwIfCancelled, isCancelledError } from "./cancellation.js";
 
 const colorCacheFile = Gio.File.new_for_path(
-  `${GLib.get_user_cache_dir()}/chromaleon/color-cache.json`,
+  `${GLib.get_user_cache_dir()}/kaleido/color-cache.json`,
 );
 
 export async function writeColorCacheFile(key, value, cancellable = null) {

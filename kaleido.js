@@ -1,10 +1,10 @@
 #!@GJS@ -m
 
 /*
- * chromaleon.js
+ * kaleido.js
  *
- * This file is part of ChromaLeon GNOME Shell Extension.
- * https://github.com/Fabito02/ChromaLeon
+ * This file is part of Kaleido GNOME Shell Extension.
+ * https://github.com/thatmechguy/Kaleido
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,6 +31,7 @@ import * as Gettext from "gettext";
 import { WallpaperPage } from "./ui/wallpaperPage.js";
 import { PreferencesPage } from "./ui/preferencesPage.js";
 import { PreloadPage } from "./ui/preloadPage.js";
+import { AppThemingPage } from "./ui/appThemingPage.js";
 
 Gio._promisify(
   Gio.File.prototype,
@@ -50,12 +51,12 @@ Gio._promisify(
 Gio._promisify(Gio.File.prototype, "query_info_async", "query_info_finish");
 Gio._promisify(Gio.File.prototype, "delete_async", "delete_finish");
 
-if (GLib.getenv("CHROMALEON_LAUNCH") === "1") {
+if (GLib.getenv("KALEIDO_LAUNCH") === "1") {
   const localeDir = GLib.get_current_dir() + "/locale";
-  Gettext.bindtextdomain("chromaleon", localeDir);
+  Gettext.bindtextdomain("kaleido", localeDir);
 }
 
-export const _ = Gettext.dgettext.bind(null, "chromaleon");
+export const _ = Gettext.dgettext.bind(null, "kaleido");
 
 const currentModulePath = import.meta.url;
 const extensionDirPath = currentModulePath.startsWith("file://")
@@ -89,7 +90,7 @@ export function buildUI(window, settings) {
   });
 
   const titleWidget = new Adw.ViewSwitcherTitle({
-    title: "ChromaLeon",
+    title: "Kaleido",
   });
   headerBar.set_title_widget(titleWidget);
 
@@ -122,7 +123,7 @@ export function buildUI(window, settings) {
   });
 
   const banner = new Adw.Banner({
-    title: _("A new version of ChromaLeon Preload is available."),
+    title: _("A new version of Kaleido Preload is available."),
     button_label: _("Update"),
     button_style: Adw.BannerButtonStyle.SUGGESTED,
     revealed: false,
@@ -147,6 +148,7 @@ export function buildUI(window, settings) {
   );
   const preferencesPage = new PreferencesPage(settings, window);
   const preloadPage = new PreloadPage(settings, window, banner);
+  const appThemingPage = new AppThemingPage(settings);
 
   const addPage = (page) => {
     const stackPage = viewStack.add(page);
@@ -157,13 +159,14 @@ export function buildUI(window, settings) {
 
   addPage(wallpaperPage);
   addPage(preloadPage);
+  addPage(appThemingPage);
   addPage(preferencesPage);
 
   if (settings.get_boolean("user-themes-warning")) {
     const dialog = new Adw.AlertDialog({
       heading: _("User Themes incompatibility warning."),
       body: _(
-        "ChromaLeon is incompatible with the User Themes extension. Keep the User Themes extension disabled to avoid visual conflicts and unexpected behavior.",
+        "Kaleido is incompatible with the User Themes extension. Keep the User Themes extension disabled to avoid visual conflicts and unexpected behavior.",
       ),
     });
 
@@ -180,21 +183,21 @@ export function buildUI(window, settings) {
   }
 }
 
-if (GLib.getenv("CHROMALEON_LAUNCH") === "1") {
-  GLib.set_application_name("ChromaLeon");
+if (GLib.getenv("KALEIDO_LAUNCH") === "1") {
+  GLib.set_application_name("Kaleido");
 
   const app = new Adw.Application({
-    application_id: "com.github.fabito02.chromaleon",
+    application_id: "io.github.thatmechguy.kaleido",
   });
 
   app.connect("activate", (app) => {
     const window = new Adw.ApplicationWindow({ application: app });
     window.set_default_size(490, 670);
-    window.set_title("ChromaLeon");
+    window.set_title("Kaleido");
 
     const settings = new Gio.Settings({
-      schema_id: "org.gnome.shell.extensions.chromaleon",
-      path: "/org/gnome/shell/extensions/chromaleon/",
+      schema_id: "org.gnome.shell.extensions.kaleido",
+      path: "/org/gnome/shell/extensions/kaleido/",
     });
 
     buildUI(window, settings);

@@ -24,6 +24,8 @@ import { Extension } from "resource:///org/gnome/shell/extensions/extension.js";
 import * as ColorUtils from "./utils/colorUtils.js";
 import * as FileUtils from "./utils/fileUtils.js";
 import * as ThemeUtils from "./utils/themeUtils.js";
+import { buildThemeData } from "./utils/paletteUtils.js";
+import { applyAppTemplates } from "./utils/appThemeUtils.js";
 import { clearRecolorTimeout } from "./utils/recolorUtils.js";
 import { throwIfCancelled, isCancelledError } from "./utils/cancellation.js";
 import {
@@ -36,7 +38,7 @@ import {
 } from "resource:///org/gnome/shell/ui/messageTray.js";
 import { getColorCache, writeColorCacheFile } from "./utils/cacheUtils.js";
 
-export default class ChromaLeon extends Extension {
+export default class Kaleido extends Extension {
   constructor(metadata) {
     super(metadata);
     this._settings = null;
@@ -63,7 +65,7 @@ export default class ChromaLeon extends Extension {
     this._settings.set_string("last-error", "");
 
     this._notifSource = new Source({
-      title: "ChromaLeon",
+      title: "Kaleido",
       iconName: "preferences-desktop-theme-symbolic",
     });
     this._notifSource.connect("destroy", () => {
@@ -78,13 +80,13 @@ export default class ChromaLeon extends Extension {
       try {
         const notification = new Notification({
           source: this._notifSource,
-          title: "ChromaLeon",
+          title: "Kaleido",
           body: msg,
           isTransient: false,
         });
         this._notifSource.addNotification(notification);
       } catch (e) {
-        console.error("ChromaLeon: failed to send notification", e);
+        console.error("Kaleido: failed to send notification", e);
       }
 
       this._settings.set_string("last-error", "");
@@ -125,6 +127,8 @@ export default class ChromaLeon extends Extension {
           await this._reloadGtkStylesheet(cancellable);
           throwIfCancelled(cancellable);
           await this._updateIconPack(cancellable);
+          throwIfCancelled(cancellable);
+          await this._updateThirdPartyThemes(cancellable);
         }),
       "changed::tint-shell",
       () => this._markDirty("shell"),
@@ -159,6 +163,10 @@ export default class ChromaLeon extends Extension {
         this._runOperation(async (cancellable) => {
           await this._updateIconPack(cancellable);
         }),
+      "changed::app-theming",
+      () => this._markDirty("themes"),
+      "changed::app-theming-templates",
+      () => this._markDirty("themes"),
       this,
     );
 
@@ -211,7 +219,7 @@ export default class ChromaLeon extends Extension {
       this._interfaceSettings.get_string("icon-theme") === "Adwaita" &&
       this._settings.get_boolean("recolor-folders")
     ) {
-      this._interfaceSettings.set_string("icon-theme", "ChromaLeon");
+      this._interfaceSettings.set_string("icon-theme", "Kaleido");
     }
 
     this._updateDesktopFile();
@@ -283,7 +291,7 @@ export default class ChromaLeon extends Extension {
       this._customStylesheet = null;
     }
 
-    if (this._interfaceSettings?.get_string("icon-theme") === "ChromaLeon") {
+    if (this._interfaceSettings?.get_string("icon-theme") === "Kaleido") {
       this._interfaceSettings.set_string("icon-theme", "Adwaita");
     }
 
@@ -306,6 +314,7 @@ export default class ChromaLeon extends Extension {
       await this._updateShellStyles(null);
       await this._updateAppStyles(null);
       if (!gnomeColors) await this._reloadGtkStylesheet(null);
+      await this._updateThirdPartyThemes(null);
     } catch (e) {
       if (!isCancelledError(e)) {
         this._settings?.set_string("last-error", e.message ?? String(e));
@@ -366,6 +375,10 @@ export default class ChromaLeon extends Extension {
         }
         if (pending.has("reload")) {
           await this._reloadGtkStylesheet(cancellable);
+          throwIfCancelled(cancellable);
+        }
+        if (pending.has("themes")) {
+          await this._updateThirdPartyThemes(cancellable);
           throwIfCancelled(cancellable);
         }
       });
@@ -473,6 +486,9 @@ export default class ChromaLeon extends Extension {
       await this._reloadGtkStylesheet(cancellable);
     }
 
+    throwIfCancelled(cancellable);
+    await this._updateThirdPartyThemes(cancellable);
+
     if (updateIcons) {
       throwIfCancelled(cancellable);
       await this._updateIconPack(cancellable);
@@ -514,13 +530,13 @@ export default class ChromaLeon extends Extension {
     const cacheDir = GLib.get_user_cache_dir();
 
     const lightFile = Gio.File.new_for_path(
-      `${cacheDir}/chromaleon/chromaleon-shell.css`,
+      `${cacheDir}/kaleido/kaleido-shell.css`,
     );
     const darkFile = Gio.File.new_for_path(
-      `${cacheDir}/chromaleon/chromaleon-shell-dark.css`,
+      `${cacheDir}/kaleido/kaleido-shell-dark.css`,
     );
     const customStylesheet = Gio.File.new_for_path(
-      `${cacheDir}/chromaleon/chromaleon-shell-custom.css`,
+      `${cacheDir}/kaleido/kaleido-shell-custom.css`,
     );
 
     const isLight = this._shouldUseLightShell();
@@ -579,6 +595,49 @@ export default class ChromaLeon extends Extension {
       tintStrength,
       cancellable,
     );
+  }
+
+  async _updateThirdPartyThemes(cancellable) {
+    throwIfCancelled(cancellable);
+
+    if (!this._settings.get_boolean("app-theming")) return;
+
+    const enabled = this._settings.get_strv("app-theming-templates");
+    if (enabled.length === 0) return;
+
+    let color = this._settings.get_string("accent-color");
+
+    if (this._settings.get_boolean("gnome-colors")) {
+      const accentName = this._interfaceSettings.get_string("accent-color");
+      color = ThemeUtils.GNOME_ACCENTS_HEX[accentName] ?? color;
+    }
+
+    if (!color || !color.startsWith("#")) return;
+
+    const isDark =
+      this._interfaceSettings.get_string("color-scheme") === "prefer-dark";
+    const mode = isDark ? "dark" : "light";
+
+    const themeData = buildThemeData(color, { defaultMode: mode });
+
+    const results = await applyAppTemplates({
+      extensionPath: this.path,
+      themeData,
+      mode,
+      enabledIds: enabled,
+      image: this._getWallpaperUri(),
+      cancellable,
+    });
+
+    const failures = results.filter((result) => result.error);
+    if (failures.length > 0) {
+      this._settings.set_string(
+        "last-error",
+        `App theming: ${failures
+          .map((failure) => `${failure.id}: ${failure.error}`)
+          .join("; ")}`,
+      );
+    }
   }
 
   _shouldUseLightShell() {

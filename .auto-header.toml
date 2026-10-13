@@ -3,7 +3,7 @@ name = "Fabiano Júnior Lima Barbosa"
 email = "fabianojuniorlimaba2@gmail.com"
 
 [project]
-name = "ChromaLeon"
+name = "Kaleido"
 copyright_holder = "Fabiano Júnior Lima Barbosa"
 
 [header]
@@ -11,7 +11,7 @@ template = """
 {filename}
 
 This file is part of {project} GNOME Shell Extension.
-https://github.com/Fabito02/ChromaLeon
+https://github.com/thatmechguy/Kaleido
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

@@ -1,8 +1,8 @@
 /*
  * themeUtils.js
  *
- * This file is part of ChromaLeon GNOME Shell Extension.
- * https://github.com/Fabito02/ChromaLeon
+ * This file is part of Kaleido GNOME Shell Extension.
+ * https://github.com/thatmechguy/Kaleido
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ const REGEX_MARKER =
   /\/\* CustomAccentExtension Start \*\/[\s\S]*?\/\* CustomAccentExtension End \*\/\n?/g;
 const START_MARKER = "/* CustomAccentExtension Start */";
 const END_MARKER = "/* CustomAccentExtension End */";
-const GNOME_ACCENTS_HEX = {
+export const GNOME_ACCENTS_HEX = {
   blue: "#3584e4",
   teal: "#2190a4",
   green: "#3a944a",
@@ -193,7 +193,7 @@ export async function updateShellStylesheet(
   }
 
   const customStylesheetFile = Gio.File.new_for_path(
-    `${homeDir}/.config/ChromaLeon/custom.css`,
+    `${homeDir}/.config/Kaleido/custom.css`,
   );
 
   const shellAccentTemplateLight = Gio.File.new_for_path(
@@ -244,7 +244,7 @@ export async function updateShellStylesheet(
         parentDir.make_directory_with_parents(null);
       }
 
-      const templateHeader = `/*\n* ChromaLeon Shell — Custom User Styles\n*/`;
+      const templateHeader = `/*\n* Kaleido Shell — Custom User Styles\n*/`;
       await writeFile(customStylesheetFile, templateHeader, cancellable);
     } catch (e) {
       if (isCancelledError(e)) throw e;
@@ -292,13 +292,13 @@ export async function updateShellStylesheet(
 
       let cacheDir = GLib.get_user_cache_dir();
       let outputFile = Gio.File.new_for_path(
-        `${cacheDir}/chromaleon/chromaleon-shell.css`,
+        `${cacheDir}/kaleido/kaleido-shell.css`,
       );
       let outputFileDark = Gio.File.new_for_path(
-        `${cacheDir}/chromaleon/chromaleon-shell-dark.css`,
+        `${cacheDir}/kaleido/kaleido-shell-dark.css`,
       );
       let outputFileCustom = Gio.File.new_for_path(
-        `${cacheDir}/chromaleon/chromaleon-shell-custom.css`,
+        `${cacheDir}/kaleido/kaleido-shell-custom.css`,
       );
 
       await Promise.all([
@@ -482,7 +482,7 @@ export async function updateIconPack(
     schema_id: "org.gnome.desktop.interface",
   });
 
-  if (!iconFolders && settings.get_string("icon-theme") === "ChromaLeon") {
+  if (!iconFolders && settings.get_string("icon-theme") === "Kaleido") {
     settings.set_string("icon-theme", "Adwaita");
     return;
   }

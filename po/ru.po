@@ -10,7 +10,7 @@ msgstr ""
 "POT-Creation-Date: 2026-10-01 17:41-0300\n"
 "PO-Revision-Date: 2026-09-24 14:51+0000\n"
 "Last-Translator: Dertefter Labs <dertefter@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/chromaleon/"
+"Language-Team: Russian <https://hosted.weblate.org/projects/kaleido/"
 "extension/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -20,28 +20,28 @@ msgstr ""
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Weblate 2026.10.dev0\n"
 
-#: chromaleon.js:125
-msgid "A new version of ChromaLeon Preload is available."
+#: kaleido.js:125
+msgid "A new version of Kaleido Preload is available."
 msgstr ""
 
-#: chromaleon.js:126
+#: kaleido.js:126
 msgid "Update"
 msgstr ""
 
-#: chromaleon.js:164
+#: kaleido.js:164
 msgid "User Themes incompatibility warning."
 msgstr "Предупреждение о несовместимости c User Themes."
 
-#: chromaleon.js:166
+#: kaleido.js:166
 msgid ""
-"ChromaLeon is incompatible with the User Themes extension. Keep the User "
+"Kaleido is incompatible with the User Themes extension. Keep the User "
 "Themes extension disabled to avoid visual conflicts and unexpected behavior."
 msgstr ""
-"ChromaLeon несовместим с расширением User Themes. Держите расширение User "
+"Kaleido несовместим с расширением User Themes. Держите расширение User "
 "Themes отключенным, чтобы избежать визуальных конфликтов и неожиданной "
 "работы программы."
 
-#: chromaleon.js:170
+#: kaleido.js:170
 msgid "I understood"
 msgstr "Понятно"
 
@@ -50,15 +50,15 @@ msgid "Preferences"
 msgstr "Параметры"
 
 #: ui/preferencesPage.js:77
-msgid "ChromaLeon only exists thanks to users like you!"
-msgstr "ChromaLeon существует только благодаря таким пользователям, как вы!"
+msgid "Kaleido only exists thanks to users like you!"
+msgstr "Kaleido существует только благодаря таким пользователям, как вы!"
 
 #: ui/preferencesPage.js:79
 msgid ""
-"If ChromaLeon has earned a place in your device's customization, consider "
+"If Kaleido has earned a place in your device's customization, consider "
 "helping the project move forward by making a small donation."
 msgstr ""
-"Если вам нравится ChromaLeon, подумайте о том, чтобы поддержать развитие "
+"Если вам нравится Kaleido, подумайте о том, чтобы поддержать развитие "
 "проекта, сделав небольшое пожертвование."
 
 #: ui/preferencesPage.js:140
@@ -216,10 +216,10 @@ msgstr "Пользовательская таблица стилей"
 #: ui/preferencesPage.js:395
 msgid ""
 "A file that overrides the CSS of the shell and user extensions, with support "
-"for ChromaLeon accent colors."
+"for Kaleido accent colors."
 msgstr ""
 "Файл, переопределяющий CSS оболочки и пользовательских расширений, с "
-"поддержкой акцентных цветов ChromaLeon."
+"поддержкой акцентных цветов Kaleido."
 
 #: ui/preferencesPage.js:414 ui/preferencesPage.js:431
 #: ui/preferencesPage.js:491
@@ -236,7 +236,7 @@ msgid ""
 "\n"
 "The extension processes all content within this file, replacing the "
 "<b><tt>@@ACCENT@@</tt></b> and <b><tt>-st-accent-color</tt></b> variables "
-"with the color selected in the ChromaLeon settings before applying them to "
+"with the color selected in the Kaleido settings before applying them to "
 "the system. This can be useful if an extension does not have the accent "
 "colors applied correctly.\n"
 "\n"
@@ -247,7 +247,7 @@ msgstr ""
 "\n"
 "Расширение обрабатывает содержимое файла, заменяя переменные "
 "<b><tt>@@ACCENT@@</tt></b> и <b><tt>-st-accent-color</tt></b> на цвет, "
-"выбранный в настройках ChromaLeon, перед применением изменений в системе. "
+"выбранный в настройках Kaleido, перед применением изменений в системе. "
 "Это может быть полезно, если акцентные цвета в каком-либо расширении "
 "применяются некорректно.\n"
 "\n"
@@ -401,10 +401,10 @@ msgstr "Целевые приложения"
 #: ui/preloadPage.js:221
 msgid ""
 "Enter the process name (e.g., firefox, thunderbird, zen-browser) to apply "
-"the ChromaLeon accent color."
+"the Kaleido accent color."
 msgstr ""
 "Введите имя процесса (например, firefox, thunderbird, zen-browser), чтобы "
-"применить акцентный цвет ChromaLeon."
+"применить акцентный цвет Kaleido."
 
 #: ui/preloadPage.js:227
 msgid "Add Application"
@@ -421,11 +421,11 @@ msgstr "Этот параметр требует дополнительной н
 #: ui/preloadPage.js:332
 msgid ""
 "To synchronize accent colors with applications that do not support "
-"ChromaLeon colors, the preload library must be compiled and installed (this "
+"Kaleido colors, the preload library must be compiled and installed (this "
 "is not necessary if using GNOME colors)."
 msgstr ""
 "Для синхронизации акцентных цветов с приложениями, не поддерживающими цвета "
-"ChromaLeon, необходимо скомпилировать и установить библиотеку "
+"Kaleido, необходимо скомпилировать и установить библиотеку "
 "предварительной загрузки (это не требуется при использовании цветов GNOME)."
 
 #: ui/preloadPage.js:372

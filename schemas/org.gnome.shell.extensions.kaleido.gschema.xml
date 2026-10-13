@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <schemalist>
   <schema
-        id="org.gnome.shell.extensions.chromaleon"
-        path="/org/gnome/shell/extensions/chromaleon/"
+        id="org.gnome.shell.extensions.kaleido"
+        path="/org/gnome/shell/extensions/kaleido/"
     >
     <key name="accent-color" type="s">
       <default>'#785ef0'</default>
@@ -117,6 +117,18 @@
       <description
             >User Themes incompatibility warning.
       </description>
+    </key>
+    <key name="app-theming" type="b">
+      <default>false</default>
+      <summary>App Theming</summary>
+      <description
+            >Propagate the active palette to third-party applications through the template catalog.</description>
+    </key>
+    <key name="app-theming-templates" type="as">
+      <default>[]</default>
+      <summary>Enabled App Templates</summary>
+      <description
+            >The catalog template ids to render when App Theming is enabled.</description>
     </key>
   </schema>
 </schemalist>

@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "description": "Kaleido app theming catalog. Each entry renders a Noctalia/matugen-compatible template with the active palette.",
+  "templates": [
+    {
+      "id": "kitty",
+      "name": "Kitty",
+      "category": "terminal",
+      "input": "kitty.conf",
+      "output": "$XDG_CONFIG_HOME/kitty/kaleido.conf",
+      "post_hook": "mkdir -p \"$XDG_CONFIG_HOME/kitty\"; f=\"$XDG_CONFIG_HOME/kitty/kitty.conf\"; touch \"$f\"; grep -qxF 'include kaleido.conf' \"$f\" || printf '\\ninclude kaleido.conf\\n' >> \"$f\"",
+      "description": "Colors for the Kitty terminal. Adds an include line to kitty.conf automatically."
+    },
+    {
+      "id": "alacritty",
+      "name": "Alacritty",
+      "category": "terminal",
+      "input": "alacritty.toml",
+      "output": "$XDG_CONFIG_HOME/alacritty/kaleido.toml",
+      "description": "Colors for Alacritty. Add `import = [\"~/.config/alacritty/kaleido.toml\"]` to your alacritty.toml."
+    },
+    {
+      "id": "foot",
+      "name": "Foot",
+      "category": "terminal",
+      "input": "foot.ini",
+      "output": "$XDG_CONFIG_HOME/foot/themes/kaleido",
+      "description": "Colors for the Foot terminal. Reference it with `include=themes/kaleido` inside `[main]` of foot.ini."
+    },
+    {
+      "id": "ghostty",
+      "name": "Ghostty",
+      "category": "terminal",
+      "input": "ghostty.conf",
+      "output": "$XDG_CONFIG_HOME/ghostty/kaleido",
+      "description": "Colors for Ghostty. Load it with `config-file = kaleido` in your Ghostty config."
+    },
+    {
+      "id": "wezterm",
+      "name": "WezTerm",
+      "category": "terminal",
+      "input": "wezterm.lua",
+      "output": "$XDG_CONFIG_HOME/wezterm/kaleido.lua",
+      "description": "Color table for WezTerm. Merge it in wezterm.lua, e.g. `config.colors = dofile(wezterm.config_dir .. '/kaleido.lua')`."
+    },
+    {
+      "id": "btop",
+      "name": "btop",
+      "category": "system",
+      "input": "btop.theme",
+      "output": "$XDG_CONFIG_HOME/btop/themes/kaleido.theme",
+      "description": "Theme for btop. Select `kaleido` as the color theme in btop options."
+    },
+    {
+      "id": "fuzzel",
+      "name": "Fuzzel",
+      "category": "launcher",
+      "input": "fuzzel.ini",
+      "output": "$XDG_CONFIG_HOME/fuzzel/kaleido.ini",
+      "description": "Colors for Fuzzel. Add `include=~/.config/fuzzel/kaleido.ini` to fuzzel.ini."
+    },
+    {
+      "id": "rofi",
+      "name": "Rofi",
+      "category": "launcher",
+      "input": "rofi.rasi",
+      "output": "$XDG_CONFIG_HOME/rofi/kaleido.rasi",
+      "description": "Global color block for Rofi. Import it with `@import \"kaleido.rasi\"` in your theme."
+    },
+    {
+      "id": "waybar",
+      "name": "Waybar",
+      "category": "system",
+      "input": "waybar.css",
+      "output": "$XDG_CONFIG_HOME/waybar/kaleido.css",
+      "post_hook": "mkdir -p \"$XDG_CONFIG_HOME/waybar\"; f=\"$XDG_CONFIG_HOME/waybar/style.css\"; touch \"$f\"; grep -qxF '@import \"kaleido.css\";' \"$f\" || printf '\\n@import \"kaleido.css\";\\n' >> \"$f\"",
+      "description": "Stylesheet for Waybar. Adds an @import line to style.css automatically."
+    },
+    {
+      "id": "mako",
+      "name": "Mako",
+      "category": "system",
+      "input": "mako.ini",
+      "output": "$XDG_CONFIG_HOME/mako/kaleido",
+      "description": "Colors for the Mako notification daemon. Add `include=~/.config/mako/kaleido` to mako/config."
+    },
+    {
+      "id": "tmux",
+      "name": "tmux",
+      "category": "terminal",
+      "input": "tmux.conf",
+      "output": "$XDG_CONFIG_HOME/tmux/kaleido.conf",
+      "post_hook": "mkdir -p \"$XDG_CONFIG_HOME/tmux\"; f=\"$XDG_CONFIG_HOME/tmux/tmux.conf\"; touch \"$f\"; grep -qxF 'source-file ~/.config/tmux/kaleido.conf' \"$f\" || printf '\\nsource-file ~/.config/tmux/kaleido.conf\\n' >> \"$f\"",
+      "description": "Status bar theme for tmux. Adds a source-file line to tmux.conf automatically."
+    },
+    {
+      "id": "hyprland",
+      "name": "Hyprland",
+      "category": "compositor",
+      "input": "hyprland.conf",
+      "output": "$XDG_CONFIG_HOME/hypr/kaleido.conf",
+      "post_hook": "mkdir -p \"$XDG_CONFIG_HOME/hypr\"; f=\"$XDG_CONFIG_HOME/hypr/hyprland.conf\"; touch \"$f\"; grep -qxF 'source = ~/.config/hypr/kaleido.conf' \"$f\" || printf '\\nsource = ~/.config/hypr/kaleido.conf\\n' >> \"$f\"",
+      "description": "Border and shadow colors for Hyprland. Adds a source line to hyprland.conf automatically."
+    },
+    {
+      "id": "hyprlock",
+      "name": "Hyprlock",
+      "category": "compositor",
+      "input": "hyprlock.conf",
+      "output": "$XDG_CONFIG_HOME/hypr/kaleido-lock.conf",
+      "description": "Colors for Hyprlock. Add `source = ~/.config/hypr/kaleido-lock.conf` to hyprlock.conf."
+    },
+    {
+      "id": "obsidian",
+      "name": "Obsidian",
+      "category": "editor",
+      "input": "obsidian.css",
+      "output": "$XDG_CONFIG_HOME/obsidian/snippets/kaleido.css",
+      "description": "CSS snippet for Obsidian. Enable it under Settings → Appearance → CSS snippets."
+    },
+    {
+      "id": "qt",
+      "name": "Qt (qt5ct / qt6ct)",
+      "category": "system",
+      "input": "qt.conf",
+      "output": [
+        "$XDG_CONFIG_HOME/qt5ct/colors/kaleido.conf",
+        "$XDG_CONFIG_HOME/qt6ct/colors/kaleido.conf"
+      ],
+      "description": "Color scheme for qt5ct and qt6ct. Select `kaleido` as the color scheme in either tool."
+    },
+    {
+      "id": "starship",
+      "name": "Starship",
+      "category": "system",
+      "input": "starship.toml",
+      "output": "$XDG_CONFIG_HOME/starship-kaleido.toml",
+      "description": "Palette block for the Starship prompt. Copy `[palettes.kaleido]` into starship.toml and set `palette = \"kaleido\"`."
+    }
+  ]
+}

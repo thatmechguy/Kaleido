@@ -12,7 +12,7 @@ OPT_ZIP=false
 OPT_CHECK=false
 
 help() {
-    echo -e "${BLUE}ChromaLeon Build & Translation Script${NC}"
+    echo -e "${BLUE}Kaleido Build & Translation Script${NC}"
     echo ""
     echo "Options:"
     echo "  -pot                Update .pot file with new template strings"
@@ -43,10 +43,10 @@ if [ "$#" -eq 0 ]; then
     read -p " -> Compile .mo files? (y/N): " resp
     [[ "$resp" =~ ^[SsYy]$ ]] && OPT_MO=true
 
-    read -p " -> Build ChromaLeon .zip package? (y/N): " resp
+    read -p " -> Build Kaleido .zip package? (y/N): " resp
     [[ "$resp" =~ ^[SsYy]$ ]] && OPT_ZIP=true
 
-    read -p " -> Validate ChromaLeon .zip file? (y/N): " resp
+    read -p " -> Validate Kaleido .zip file? (y/N): " resp
     [[ "$resp" =~ ^[SsYy]$ ]] && OPT_CHECK=true
 
     echo -e "------------------------------------------------------------\n"
@@ -71,14 +71,14 @@ if [ "$OPT_POT" = true ]; then
     xgettext --from-code=UTF-8 \
              --language=JavaScript \
              --keyword=_ \
-             --output=po/chromaleon.pot \
+             --output=po/kaleido.pot \
              *.js ./utils/*.js ./ui/*.js
 fi
 
 if [ "$OPT_PO" = true ]; then
     echo -e "\n${BLUE}Updating .po files...${NC}"
 
-    for po in po/*.po; do msgmerge --update "$po" po/chromaleon.pot; done
+    for po in po/*.po; do msgmerge --update "$po" po/kaleido.pot; done
 fi
 
 if [ "$OPT_MO" = true ]; then
@@ -87,12 +87,12 @@ if [ "$OPT_MO" = true ]; then
     for lang in po/*.po; do
         lang_code=$(basename "$lang" .po)
         mkdir -p "locale/$lang_code/LC_MESSAGES"
-        msgfmt "$lang" -o "locale/$lang_code/LC_MESSAGES/chromaleon.mo"
+        msgfmt "$lang" -o "locale/$lang_code/LC_MESSAGES/kaleido.mo"
     done
 fi
 
 if [ "$OPT_ZIP" = true ]; then
-    echo -e "\n${BLUE}Building ChromaLeon .zip package...${NC}"
+    echo -e "\n${BLUE}Building Kaleido .zip package...${NC}"
 
     cp -r ./locale/zh_Hans ./locale/zh_CN
     cp -r ./po/zh_Hans.po ./po/zh_CN.po
@@ -102,7 +102,7 @@ if [ "$OPT_ZIP" = true ]; then
       --extra-source=assets \
       --extra-source=utils \
       --extra-source=ui \
-      --extra-source=chromaleon.js \
+      --extra-source=kaleido.js \
       --extra-source=prefs.css \
       -f
 
@@ -113,7 +113,7 @@ if [ "$OPT_ZIP" = true ]; then
 fi
 
 if [ "$OPT_CHECK" = true ]; then
-    echo -e "\n${BLUE}Validating ChromaLeon .zip package...${NC}"
+    echo -e "\n${BLUE}Validating Kaleido .zip package...${NC}"
 
     if [ ! -d "venv" ]; then
         echo "Creating Python virtual environment..."
@@ -123,7 +123,7 @@ if [ "$OPT_CHECK" = true ]; then
     source venv/bin/activate
     pip install -q -U shexli
 
-    PYTHONFAULTHANDLER=1 shexli user-accent-colors@fabito02.shell-extension.zip
+    PYTHONFAULTHANDLER=1 shexli kaleido@thatmechguy.shell-extension.zip
     deactivate
 fi
 

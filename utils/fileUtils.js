@@ -1,8 +1,8 @@
 /*
  * fileUtils.js
  *
- * This file is part of ChromaLeon GNOME Shell Extension.
- * https://github.com/Fabito02/ChromaLeon
+ * This file is part of Kaleido GNOME Shell Extension.
+ * https://github.com/thatmechguy/Kaleido
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -70,7 +70,7 @@ export async function createDesktopFile(path) {
   const desktopPath = GLib.build_filenamev([
     dataDir,
     "applications",
-    "com.github.fabito02.chromaleon.desktop",
+    "io.github.thatmechguy.kaleido.desktop",
   ]);
 
   const file = Gio.File.new_for_path(desktopPath);
@@ -80,7 +80,7 @@ export async function createDesktopFile(path) {
     appsDir.make_directory_with_parents(null);
   }
 
-  const iconBaseName = "io.github.Fabito02.chromaleon";
+  const iconBaseName = "io.github.thatmechguy.kaleido";
   const iconDestPath = GLib.build_filenamev([
     dataDir,
     "icons",
@@ -111,7 +111,7 @@ Terminal=false
 NoDisplay=false
 StartupNotify=true
 Categories=Settings;DesktopSettings;GTK;
-Name=ChromaLeon
+Name=Kaleido
 Comment=Adapt the system's colors like a chameleon
 Comment[pt_BR]=Adapte as cores do sistema como um camaleão
 Comment[es]=Adapta los colores del sistema como un camлеón
@@ -119,9 +119,9 @@ Comment[fr]=Adaptez les couleurs du système comme un caméléon
 Comment[de]=Passen Sie die Systemfarben wie ein Chamäleon an
 Comment[it]=Adatta i colori del sistema come un camaleonte
 Comment[ru]=Адаптируйте цвета системы, как хамелеон
-Exec=sh -c "cd '${path}' && GSETTINGS_SCHEMA_DIR=./schemas CHROMALEON_LAUNCH=1 gjs -m chromaleon.js"
+Exec=sh -c "cd '${path}' && GSETTINGS_SCHEMA_DIR=./schemas KALEIDO_LAUNCH=1 gjs -m kaleido.js"
 Icon=${iconBaseName}
-StartupWMClass=com.github.fabito02.chromaleon`;
+StartupWMClass=io.github.thatmechguy.kaleido`;
 
   let bytes = new GLib.Bytes(new TextEncoder().encode(content.trim()));
 
@@ -149,7 +149,7 @@ export function removeDesktopFile() {
   const desktopPath = GLib.build_filenamev([
     dataDir,
     "applications",
-    "com.github.fabito02.chromaleon.desktop",
+    "io.github.thatmechguy.kaleido.desktop",
   ]);
   const file = Gio.File.new_for_path(desktopPath);
 

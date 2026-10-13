@@ -1,0 +1,26 @@
+/* Kaleido — generated colors for Rofi. Do not edit by hand.
+ * Import with: @import "kaleido.rasi" */
+* {
+    background-color: {{ colors.surface.default.hex }};
+    text-color: {{ colors.on_surface.default.hex }};
+    border-color: {{ colors.primary.default.hex }};
+
+    normal-background: {{ colors.surface.default.hex }};
+    normal-foreground: {{ colors.on_surface.default.hex }};
+    alternate-normal-background: {{ colors.surface_container.default.hex }};
+    alternate-normal-foreground: {{ colors.on_surface.default.hex }};
+
+    selected-normal-background: {{ colors.primary.default.hex }};
+    selected-normal-foreground: {{ colors.on_primary.default.hex }};
+    alternate-selected-normal-background: {{ colors.primary.default.hex }};
+    alternate-selected-normal-foreground: {{ colors.on_primary.default.hex }};
+
+    urgent-background: {{ colors.error.default.hex }};
+    urgent-foreground: {{ colors.on_error.default.hex }};
+
+    active-background: {{ colors.secondary_container.default.hex }};
+    active-foreground: {{ colors.on_secondary_container.default.hex }};
+
+    selected-active-background: {{ colors.primary_container.default.hex }};
+    selected-active-foreground: {{ colors.on_primary_container.default.hex }};
+}

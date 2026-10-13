@@ -1,171 +1,123 @@
-<div align="center">
+# Kaleido
 
-# ChromaLeon
+Kaleido is a GNOME Shell extension that extracts an accent color from your
+wallpaper, turns it into a full Material-style palette, and applies it to your
+entire desktop — the Shell, GTK apps, folder/app icons, **and your other
+applications** through a catalog of themes.
 
-<img width="250" alt="ChromaLeon Icon" src="https://github.com/user-attachments/assets/69936dab-2287-4740-a17c-3e6de09d2b5f" />
-
-<br><br>
-
-### Adapt GNOME colors like a chameleon
-
-Change your GNOME Shell, Adwaita, adw-gtk3, and app/folder icons accent colors dynamically based on your wallpaper.
-
-[![GNOME Extensions Downloads](https://img.shields.io/gnome-extensions/dt/user-accent-colors@fabito02?style=flat&logo=gnome&logoColor=white&color=3f86e3)](https://extensions.gnome.org/extension/10070/user-accent-colors/)
-[![GitHub License](https://img.shields.io/github/license/fabito02/ChromaLeon?style=flat&logo=gplv3&logoColor=white&color=50fa7b)](https://github.com/Fabito02/ChromaLeon/blob/main/LICENSE)
-[![Stars](https://img.shields.io/github/stars/Fabito02/ChromaLeon?style=flat&logo=github&logoColor=white&color=f1fa8c)](https://github.com/Fabito02/ChromaLeon/stargazers)
-[![Translation Status](https://img.shields.io/weblate/progress/chromaleon?style=flat&logo=weblate&logoColor=white)](https://hosted.weblate.org/engage/chromaleon/)
-[![GitHub Sponsors](https://img.shields.io/github/sponsors/Fabito02?style=flat&logo=githubsponsors&logoColor=white&color=ea4aaa)](https://github.com/sponsors/Fabito02)
-
-<br>
-
-<img width="2560" height="1440" src="https://github.com/user-attachments/assets/c695c288-5fe6-4dea-b59f-ebd8129702d6" />
-
-<br>
-<br>
-
-| Base Style           | Dark Mode Example                                                                                                                                    | Light Mode Example                                                                                                                                    |
-| :------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Tinted**           | <img width="1366" height="768" alt="Tinted Dark" src="https://github.com/user-attachments/assets/ef98ba16-7151-4360-b783-8c302cd66cee" />            | <img width="1366" height="768" alt="Tinted Light" src="https://github.com/user-attachments/assets/98a9cfad-80a1-49c2-b8aa-990860daa3e2" />            |
-| **Standard**         | <img width="1366" height="768" alt="Standard Dark" src="https://github.com/user-attachments/assets/fda49284-95dd-49b0-a4c4-2099c8cc31f5" />          | <img width="1366" height="768" alt="Standard Light" src="https://github.com/user-attachments/assets/ce4f87fe-6deb-4368-aa8e-a2c4eabd93f1" />          |
-| **Folders and Apps** | <img width="1366" height="768" alt="Folders and Icons Dark" src="https://github.com/user-attachments/assets/40289967-4f5a-48ca-8360-97ba85a3c221" /> | <img width="1366" height="768" alt="Folders and Icons Light" src="https://github.com/user-attachments/assets/705b5c0e-6e1d-459f-9862-73ac319a58c5" /> |
-
-<br>
-</div>
-
-## Notes:
-
-> [!WARNING]
-> ChromaLeon **conflicts DIRECTLY** with the [User Theme](https://extensions.gnome.org/extension/19/user-themes/) extension. If you have this extension installed, please **REMOVE or DISABLE it** to avoid any errors.
-
-- ChromaLeon was created within the context of the Adwaita theme. If you are experiencing any issues customizing applications or GNOME Shell, please ensure you are using the Adwaita theme before opening an issue.
-- A special thanks to [PakoVM](https://github.com/pakovm-git) for the inspiration behind the **tinted style**. The implementation in **ChromaLeon** was based on an idea from his [Tint My GNOME](https://github.com/pakovm-git/Tint-my-Gnome) extension.
-- ChromaLeon is a project I maintain in my spare time. If possible, please consider making a [small donation to support my work](https://ko-fi.com/fabito02)!
+It is a fork of [ChromaLeon](https://github.com/Fabito02/ChromaLeon) by
+Fabito02, extended with a Noctalia v5 / matugen-compatible template engine and
+an application theming catalog.
 
 ## Features
 
-- **Dynamic Extraction:** Automatically extracts accent colors from your current wallpaper.
-- **GNOME Colors:** Support for native GNOME accent colors.
-- **Unified Theme:** Applies accent colors seamlessly across GNOME Shell and `GTK 3.0` / `GTK 4.0` apps.
-- **Tint:** Theme the Shell and all your LibAdwaita and GTK3 applications with Adw-GTK3.
-- **Accent Colors in Folders:** Applies the accent color to the folders.
-- **Accent Colors in Apps:** Applies the accent color to some app icons.
-- **Wallpaper selector:** Wallpaper selector for user wallpapers and Gnome dynamic wallpapers.
-- **Custom CSS:** Apply custom CSS to the shell, with support for ChromaLeon's accent color.
-- **Hot Reload:** Hot reload for GTK4 applications with support for ChromaLeon colors (this works natively for GNOME colors).
-- **Flatpak Support:** Syncs color variables so your sandboxed Flatpak applications match the rest of the system.
-- **Shortcut:** Create a shortcut in the app grid to use this as an app.
+- **Dynamic extraction** — pulls a vibrant accent color from your current
+  wallpaper.
+- **Unified system theming** — applies the accent to GNOME Shell, Adwaita,
+  adw-gtk3, and app/folder icons.
+- **App theming** — renders the active palette into terminals, editors,
+  launchers, compositors and more using a template catalog.
+- **Material palette** — builds the full set of Material 3 color roles
+  (`primary`, `surface`, containers, outlines, terminal colors, …) for both
+  dark and light modes.
+- **Tint, darker tint and full-light styles**, custom CSS, Flatpak support and
+  icon recolouring.
 
----
+## App theming
 
-## Translation
+Enable **App Theming** in the extension preferences and pick the apps you want
+to keep in sync. Each entry renders a template with the active palette and
+writes a dedicated theme file. A few entries also add an `include`/`source`
+line to the application's own configuration.
 
-<div align="center">
-  <div>
-    <a href="https://hosted.weblate.org/engage/chromaleon/">
-      <img src="https://github.com/user-attachments/assets/167726c7-481c-4492-bbb4-1c1346ab7c5a" alt="Weblate Logo" width="100" style="vertical-align: middle; margin-right: 20px;" />
-    </a>
-    <h3>Help Translate ChromaLeon</h3>
-    <p>Contribute to making the project accessible in your language via Weblate!</p>
-  </div>
+Shipped templates:
 
-  <br />
+| App                  | Category   | What it writes                                   |
+| -------------------- | ---------- | ------------------------------------------------ |
+| Kitty                | terminal   | `~/.config/kitty/chromaleon…` (+ include)        |
+| Alacritty            | terminal   | `~/.config/alacritty/chromaleon.toml`            |
+| Foot                 | terminal   | `~/.config/foot/themes/chromaleon`               |
+| Ghostty              | terminal   | `~/.config/ghostty/chromaleon`                   |
+| WezTerm              | terminal   | `~/.config/wezterm/chromaleon.lua`               |
+| tmux                 | terminal   | `~/.config/tmux/chromaleon.conf` (+ source)      |
+| btop                 | system     | `~/.config/btop/themes/chromaleon.theme`         |
+| Mako                 | system     | `~/.config/mako/chromaleon`                      |
+| Waybar               | system     | `~/.config/waybar/chromaleon.css` (+ @import)    |
+| Qt (qt5ct/qt6ct)     | system     | `…/qt5ct/colors/chromaleon.conf`, `qt6ct`        |
+| Starship             | system     | `~/.config/starship-chromaleon.toml`             |
+| Fuzzel               | launcher   | `~/.config/fuzzel/chromaleon.ini`                |
+| Rofi                 | launcher   | `~/.config/rofi/chromaleon.rasi`                 |
+| Hyprland             | compositor | `~/.config/hypr/chromaleon.conf` (+ source)      |
+| Hyprlock             | compositor | `~/.config/hypr/chromaleon-lock.conf`            |
+| Obsidian             | editor     | `~/.config/obsidian/snippets/chromaleon.css`     |
 
-  <a href="https://hosted.weblate.org/engage/chromaleon/">
-    <img src="https://hosted.weblate.org/widget/chromaleon/multi-auto.svg" alt="Translation Status" style="vertical-align: middle;" />
-  </a>
-</div>
+App theming is **opt-in** and off by default. Files are only rewritten when
+their contents change.
+
+## Template engine
+
+The renderer is a self-contained, GJS-native port of the
+[Noctalia v5](https://docs.noctalia.dev/noctalia/theming/templates/) template
+syntax (which itself is matugen-compatible). Templates use:
+
+```
+{{ colors.primary.default.hex }}
+{{ colors.surface.dark.rgb }}
+{{ palettes.primary.40.hex }}
+{{ colors.primary.default.hex | darken 10 | set_alpha 0.6 }}
+```
+
+- **Data model** — `colors.<token>.<mode>.<format>` and
+  `palettes.<family>.<tone>.<format>`, where `mode` is `dark`, `light` or
+  `default`.
+- **Formats** — `hex`, `hex_stripped`, `rgb`, `rgb_csv`, `rgba`, `hsl`,
+  `hsla`, `red`, `green`, `blue`, `alpha`, `hue`, `saturation`, `lightness`.
+- **Filters** — `grayscale`, `invert`, `set_alpha`, `set_lightness`, `set_hue`,
+  `rotate_hue`, `set_saturation`, `saturate`, `desaturate`, `lighten`,
+  `darken`, `auto_lightness`, `set_red/green/blue`, `blend`, `harmonize`,
+  `to_color`, and the string filters `replace`, `lower_case`, `camel_case`,
+  `pascal_case`, `snake_case`, `kebab_case`.
+- **Control flow** — `<* for x in y *>…<* endfor *>` and
+  `<* if {{ cond }} *>…<* else *>…<* endif *>` with `loop.index/first/last`.
+
+### Adding a template
+
+1. Create the template file in `app-templates/`.
+2. Add an entry to `app-templates/manifest.json`:
+
+```json
+{
+  "id": "myapp",
+  "name": "My App",
+  "category": "system",
+  "input": "myapp.conf",
+  "output": "$XDG_CONFIG_HOME/myapp/theme.conf",
+  "post_hook": "myapp --reload-theme"
+}
+```
+
+`output` may be a string or an array of paths. `requires` skips the entry
+unless a path exists, and `post_hook` runs a shell command after writing.
 
 ## Installation
 
-### The Easy Way
-
-Install it directly from the official GNOME Extensions store with a single click:
-
-<div align="center">
-
-[<img src="https://raw.githubusercontent.com/andyholmes/gnome-shell-extensions-badge/master/get-it-on-ego.svg?sanitize=true" alt="Get it on GNOME Extensions" height="75">](https://extensions.gnome.org/extension/10070/user-accent-colors/)
-
-</div>
-
-### Manual Installation
-
-If you prefer to install it manually from source, run the following commands in your terminal:
-
-```bash
-# Clone the repository
-git clone https://github.com/Fabito02/ChromaLeon
-
-# Move it to the extensions directory
-mv ChromaLeon ~/.local/share/gnome-shell/extensions/user-accent-colors@fabito02
-
-# Compile the GSettings schemas
-glib-compile-schemas ~/.local/share/gnome-shell/extensions/user-accent-colors@fabito02/schemas/
-
-# Enable the extension
-gnome-extensions enable user-accent-colors@fabito02
+```sh
+git clone https://github.com/thatmechguy/Kaleido.git
+mv Kaleido ~/.local/share/gnome-shell/extensions/kaleido@thatmechguy
+glib-compile-schemas ~/.local/share/gnome-shell/extensions/kaleido@thatmechguy/schemas/
+gnome-extensions enable kaleido@thatmechguy
 ```
 
-> **Note:** After enabling the extension for the first time, you need to restart the GNOME Shell to apply the core stylesheets.
->
-> - **On X11:** Press `Alt + F2`, type `r`, and hit `Enter`.
-> - **On Wayland:** Log out and log back into your session.
+Restart GNOME Shell on X11 with `Alt+F2`, `r`, `Enter`, or log out and back in
+on Wayland.
 
-<br>
+## Compatibility
 
-## Extended compatibility
+GNOME Shell 48 through 51.
 
-It is possible to expand ChromaLeon's color compatibility by performing an additional configuration. You can find the setup guide in the [ChromaLeon Preload repository](https://github.com/Fabito02/chromaleon-preload/).
+## Credits and license
 
-<br>
-
-## 💖️ Support the Project
-
-### ChromaLeon is a project I maintain in my spare time. If it helps you customize your device, please consider supporting my work with a small contribution :)
-
-<br>
-
-**GitHub Sponsors:**
-<br>
-
-[![GitHub Sponsors](https://img.shields.io/badge/Sponsor-GitHub-ea4aaa?style=for-the-badge&logo=githubsponsors&logoColor=white)](https://github.com/sponsors/Fabito02)
-<br>
-
-**Kofi:**
-<br>
-
-[<img height="60" alt="support_me_on_kofi_badge_beige" src="https://github.com/user-attachments/assets/2b1250e5-3e73-43be-b3a9-9e6f7c9dc187" />](https://ko-fi.com/fabito02)
-
-**Bitcoin:**
-<br><br>
-<img width="200" height="200" alt="Bitcoin" src="https://github.com/user-attachments/assets/480bcbe2-a436-4fd4-b965-b8db7fd43462" />
-<br><br>
-**Lightning Address:** `fabito02@bipa.app`
-
-**Pix (For Brazilian users 🇧🇷️):**
-<br>
-
-<img width="200" alt="Pix" src="https://github.com/user-attachments/assets/5f04d71e-4b7f-401d-89eb-ba059ce790b6" />
-<br><br>
-
-<img width="200" alt="QR Code Pix" src="https://github.com/user-attachments/assets/bff31fed-651c-4751-9783-3d8fa9fa68dd" />
-<br><br>
-
-**Pix Key:** `9492f4aa-3da3-4824-ac7f-6f559a9b360d`
-
-## 🌟️ Star History
-
-<a href="https://www.star-history.com/?repos=fabito02%2Fchromaleon&type=date&legend=top-left">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=fabito02/chromaleon&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=fabito02/chromaleon&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=fabito02/chromaleon&type=date&legend=top-left" />
- </picture>
-</a>
-
-## 🫂️ Contributors
-
-<a href="https://github.com/fabito02/chromaleon/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=fabito02/chromaleon" />
-</a>
-
-Made with [contrib.rocks](https://contrib.rocks).
+Kaleido is based on
+[ChromaLeon](https://github.com/Fabito02/ChromaLeon) © Fabito02 and is released
+under the GNU General Public License v3.0 or later. The template engine is a
+compatible reimplementation of the Noctalia v5 template syntax.

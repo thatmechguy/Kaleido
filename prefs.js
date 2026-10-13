@@ -1,8 +1,8 @@
 /*
  * prefs.js
  *
- * This file is part of ChromaLeon GNOME Shell Extension.
- * https://github.com/Fabito02/ChromaLeon
+ * This file is part of Kaleido GNOME Shell Extension.
+ * https://github.com/thatmechguy/Kaleido
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,9 +21,9 @@
  */
 
 import { ExtensionPreferences } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
-import { buildUI } from "./chromaleon.js";
+import { buildUI } from "./kaleido.js";
 
-export default class ChromaLeonPreferences extends ExtensionPreferences {
+export default class KaleidoPreferences extends ExtensionPreferences {
   fillPreferencesWindow(window) {
     const settings = this.getSettings();
 

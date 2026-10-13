@@ -1,8 +1,8 @@
 /*
  * preloadPage.js
  *
- * This file is part of ChromaLeon GNOME Shell Extension.
- * https://github.com/Fabito02/ChromaLeon
+ * This file is part of Kaleido GNOME Shell Extension.
+ * https://github.com/thatmechguy/Kaleido
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ import GLib from "gi://GLib";
 import Gtk from "gi://Gtk";
 import GObject from "gi://GObject";
 import Pango from "gi://Pango";
-import { _ } from "../chromaleon.js";
+import { _ } from "../kaleido.js";
 
 export class PreloadPage extends Adw.PreferencesPage {
   static {
@@ -218,7 +218,7 @@ export class PreloadPage extends Adw.PreferencesPage {
     const optionsGroup = new Adw.PreferencesGroup({
       title: _("Target apps"),
       description: _(
-        "Enter the process name (e.g., firefox, thunderbird, zen-browser) to apply the ChromaLeon accent color.",
+        "Enter the process name (e.g., firefox, thunderbird, zen-browser) to apply the Kaleido accent color.",
       ),
     });
     this.add(optionsGroup);
@@ -329,7 +329,7 @@ export class PreloadPage extends Adw.PreferencesPage {
 
     const title = _("This option requires additional configuration.");
     const contentSupport = _(
-      "To synchronize accent colors with applications that do not support ChromaLeon colors, the preload library must be compiled and installed (this is not necessary if using GNOME colors).",
+      "To synchronize accent colors with applications that do not support Kaleido colors, the preload library must be compiled and installed (this is not necessary if using GNOME colors).",
     );
 
     const label = new Gtk.Label({

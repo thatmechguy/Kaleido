@@ -1,8 +1,8 @@
 /*
  * wallpaperPage.js
  *
- * This file is part of ChromaLeon GNOME Shell Extension.
- * https://github.com/Fabito02/ChromaLeon
+ * This file is part of Kaleido GNOME Shell Extension.
+ * https://github.com/thatmechguy/Kaleido
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ import GLib from "gi://GLib";
 import Gdk from "gi://Gdk";
 import Gtk from "gi://Gtk";
 import GObject from "gi://GObject";
-import { _ } from "../chromaleon.js";
+import { _ } from "../kaleido.js";
 import GdkPixbuf from "gi://GdkPixbuf";
 import GnomeDesktop from "gi://GnomeDesktop";
 import {
