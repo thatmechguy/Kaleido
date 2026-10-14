@@ -40,6 +40,30 @@ import {
 import { throwIfCancelled, isCancelledError } from "../utils/cancellation.js";
 import { getColorCache, writeColorCacheFile } from "../utils/cacheUtils.js";
 
+Gio._promisify(
+  GnomeDesktop.DesktopThumbnailFactory.prototype,
+  "generate_thumbnail_async",
+  "generate_thumbnail_finish",
+);
+Gio._promisify(
+  GnomeDesktop.DesktopThumbnailFactory.prototype,
+  "save_thumbnail_async",
+  "save_thumbnail_finish",
+);
+Gio._promisify(Gio.File.prototype, "query_info_async", "query_info_finish");
+Gio._promisify(Gio.File.prototype, "load_contents_async", "load_contents_finish");
+Gio._promisify(Gio.File.prototype, "delete_async", "delete_finish");
+Gio._promisify(
+  Gio.File.prototype,
+  "enumerate_children_async",
+  "enumerate_children_finish",
+);
+Gio._promisify(
+  Gio.FileEnumerator.prototype,
+  "next_files_async",
+  "next_files_finish",
+);
+
 const thumbnailFactory = GnomeDesktop.DesktopThumbnailFactory.new(
   GnomeDesktop.DesktopThumbnailSize.LARGE,
 );
@@ -79,6 +103,35 @@ async function getThumbnail(path) {
     throw new Error(_("Error getting thumbnail: " + e.message));
   }
 }
+
+async function parseSlideshowXml(filePath) {
+  try {
+    const file = Gio.File.new_for_path(filePath);
+    if (!file.query_exists(null)) return null;
+
+    const [contents] = await file.load_contents_async(null);
+    const xmlText = new TextDecoder().decode(contents);
+
+    const matches = [
+      ...xmlText.matchAll(
+        /<static>[\s\S]*?<file>(.*?)<\/file>[\s\S]*?<\/static>/g,
+      ),
+    ];
+
+    if (matches.length > 0) {
+      const files = matches.map((m) => m[1].trim());
+      return {
+        light: files[0],
+        dark: files[Math.floor(files.length / 2)] || files[0],
+      };
+    }
+  } catch (e) {
+    return null;
+  }
+  return null;
+}
+
+const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp|jxl|bmp|gif|svg)$/i;
 
 export class WallpaperPage extends Adw.PreferencesPage {
   static {
@@ -463,33 +516,6 @@ export class WallpaperPage extends Adw.PreferencesPage {
 
   async _readXmlProperties(xmlFile) {
     try {
-      const parseSlideshowXml = async (filePath) => {
-        try {
-          const file = Gio.File.new_for_path(filePath);
-          if (!file.query_exists(null)) return null;
-
-          const [contents] = await file.load_contents_async(null);
-          const xmlText = new TextDecoder().decode(contents);
-
-          const matches = [
-            ...xmlText.matchAll(
-              /<static>[\s\S]*?<file>(.*?)<\/file>[\s\S]*?<\/static>/g,
-            ),
-          ];
-
-          if (matches.length > 0) {
-            const files = matches.map((m) => m[1].trim());
-            return {
-              light: files[0],
-              dark: files[Math.floor(files.length / 2)] || files[0],
-            };
-          }
-        } catch (e) {
-          return null;
-        }
-        return null;
-      };
-
       const [contents] = await xmlFile.load_contents_async(null);
       const xmlText = new TextDecoder().decode(contents);
       const wallpapers = [];
@@ -533,6 +559,99 @@ export class WallpaperPage extends Adw.PreferencesPage {
     } catch (e) {
       return [];
     }
+  }
+
+  async _scanBackgroundDir(dirPath, out, depth = 0) {
+    if (depth > 3) return;
+
+    const dir = Gio.File.new_for_path(dirPath);
+    if (!dir.query_exists(null)) return;
+
+    const iter = await dir.enumerate_children_async(
+      "standard::name,standard::type",
+      Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS,
+      GLib.PRIORITY_DEFAULT,
+      null,
+    );
+
+    while (true) {
+      const infos = await iter.next_files_async(50, GLib.PRIORITY_DEFAULT, null);
+      if (infos.length === 0) break;
+
+      for (const info of infos) {
+        const name = info.get_name();
+
+        if (info.get_file_type() === Gio.FileType.DIRECTORY) {
+          await this._scanBackgroundDir(
+            `${dirPath}/${name}`,
+            out,
+            depth + 1,
+          );
+          continue;
+        }
+
+        const childPath = `${dirPath}/${name}`;
+
+        if (name.toLowerCase().endsWith(".xml")) {
+          const slideshow = await parseSlideshowXml(childPath);
+          if (slideshow) {
+            out.push({
+              name: name.replace(/\.xml$/i, ""),
+              pathLight: slideshow.light,
+              pathDark: slideshow.dark,
+              slideshow: true,
+            });
+          }
+        } else if (IMAGE_EXTENSIONS.test(name)) {
+          out.push({
+            name: name.replace(IMAGE_EXTENSIONS, ""),
+            pathLight: childPath,
+            pathDark: null,
+            slideshow: false,
+          });
+        }
+      }
+    }
+
+    iter.close(null);
+  }
+
+  async _scanSystemBackgrounds() {
+    const out = [];
+    const dirs = new Set();
+
+    for (const base of [...GLib.get_system_data_dirs(), "/usr/share"]) {
+      dirs.add(GLib.canonicalize_filename(`${base}/backgrounds`, null));
+    }
+
+    for (const dir of dirs) {
+      await this._scanBackgroundDir(dir, out);
+    }
+
+    const unique = [];
+    const seen = new Set();
+    const norm = (p) => (p ? GLib.canonicalize_filename(p, null) : null);
+
+    const slideshows = out.filter((e) => e.slideshow);
+    const images = out.filter((e) => !e.slideshow);
+
+    for (const entry of slideshows) {
+      const light = norm(entry.pathLight);
+      if (seen.has(light)) continue;
+      seen.add(light);
+      if (entry.pathDark) seen.add(norm(entry.pathDark));
+      unique.push(entry);
+    }
+
+    for (const entry of images) {
+      const light = norm(entry.pathLight);
+      if (seen.has(light)) continue;
+      seen.add(light);
+      unique.push(entry);
+    }
+
+    unique.sort((a, b) => a.name.localeCompare(b.name));
+    return unique;
   }
 
   async _loadWallpapersAsync() {
@@ -659,6 +778,8 @@ export class WallpaperPage extends Adw.PreferencesPage {
       );
     }
 
+    let systemWallpapers = [];
+
     if (systemXmlDir.query_exists(null)) {
       const iter = await systemXmlDir.enumerate_children_async(
         "standard::name",
@@ -666,8 +787,6 @@ export class WallpaperPage extends Adw.PreferencesPage {
         GLib.PRIORITY_DEFAULT,
         null,
       );
-
-      let systemWallpapers = [];
 
       while (true) {
         const fileInfos = await iter.next_files_async(
@@ -686,7 +805,13 @@ export class WallpaperPage extends Adw.PreferencesPage {
           }
         }
       }
+    }
 
+    if (systemWallpapers.length === 0) {
+      systemWallpapers = await this._scanSystemBackgrounds();
+    }
+
+    if (systemWallpapers.length > 0) {
       systemWallpapers.forEach((file) => {
         const child = new Gtk.FlowBoxChild({
           focusable: true,

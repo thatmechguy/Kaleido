@@ -94,6 +94,7 @@ const ROLE_MAP = [
   ["inverse_surface", "neutral", 20, 90],
   ["inverse_on_surface", "neutral", 95, 20],
   ["inverse_primary", "primary", 80, 40],
+  ["surface_tint", "primary", 40, 80],
 
   ["hover", "tertiary", 40, 80],
   ["on_hover", "tertiary", 100, 20],
