@@ -33,7 +33,8 @@
       "category": "terminal",
       "input": "ghostty.conf",
       "output": "$XDG_CONFIG_HOME/ghostty/kaleido",
-      "description": "Colors for Ghostty. Load it with `config-file = kaleido` in your Ghostty config."
+      "description": "Colors for Ghostty. Load it with `config-file = kaleido` in your Ghostty config.",
+      "post_hook": "mkdir -p \"$XDG_CONFIG_HOME/ghostty\"; [ -f \"$XDG_CONFIG_HOME/ghostty/config\" ] && grep -qxF \"theme = kaleido\" \"$XDG_CONFIG_HOME/ghostty/config\" || echo 'theme = kaleido' >> \"$XDG_CONFIG_HOME/ghostty/config\""
     },
     {
       "id": "wezterm",
@@ -116,7 +117,7 @@
       "category": "editor",
       "input": "obsidian.css",
       "output": "$XDG_CONFIG_HOME/obsidian/snippets/kaleido.css",
-      "description": "CSS snippet for Obsidian. Enable it under Settings → Appearance → CSS snippets."
+      "description": "CSS snippet for Obsidian. Enable it under Settings \u2192 Appearance \u2192 CSS snippets."
     },
     {
       "id": "qt",
@@ -136,6 +137,103 @@
       "input": "starship.toml",
       "output": "$XDG_CONFIG_HOME/starship-kaleido.toml",
       "description": "Palette block for the Starship prompt. Copy `[palettes.kaleido]` into starship.toml and set `palette = \"kaleido\"`."
+    },
+    {
+      "id": "neovim",
+      "name": "Neovim",
+      "category": "editor",
+      "input": "neovim.lua",
+      "output": "$XDG_CONFIG_HOME/nvim/colors/kaleido.lua",
+      "description": "Neovim colorscheme",
+      "post_hook": "bash '{{ config_dir }}/neovim_apply.sh'"
+    },
+    {
+      "id": "micro",
+      "name": "Micro",
+      "category": "editor",
+      "input": "micro.micro",
+      "output": "$XDG_CONFIG_HOME/micro/colorschemes/kaleido.micro",
+      "description": "Micro colorscheme"
+    },
+    {
+      "id": "helix",
+      "name": "Helix",
+      "category": "editor",
+      "input": "helix.toml",
+      "output": "$XDG_CONFIG_HOME/helix/themes/kaleido.toml",
+      "description": "Helix theme"
+    },
+    {
+      "id": "zed",
+      "name": "Zed",
+      "category": "editor",
+      "input": "zed.json",
+      "output": "$XDG_CONFIG_HOME/zed/themes/kaleido.json",
+      "description": "Zed theme"
+    },
+    {
+      "id": "vscode",
+      "name": "Vscode",
+      "category": "editor",
+      "input": "vscode.json",
+      "output": "$XDG_CONFIG_HOME/VSCodium/User/themes/kaleido.json",
+      "description": "Vscode theme"
+    },
+    {
+      "id": "cava",
+      "name": "Cava",
+      "category": "audio",
+      "input": "cava.ini",
+      "output": "$XDG_CONFIG_HOME/cava/themes/kaleido",
+      "description": "Cava theme"
+    },
+    {
+      "id": "yazi",
+      "name": "Yazi",
+      "category": "terminal",
+      "input": "yazi.toml",
+      "output": "$XDG_CONFIG_HOME/yazi/theme.toml",
+      "description": "Yazi theme"
+    },
+    {
+      "id": "sway",
+      "name": "Sway",
+      "category": "compositor",
+      "input": "sway.conf",
+      "output": "$XDG_CONFIG_HOME/sway/themes/kaleido",
+      "description": "Sway theme"
+    },
+    {
+      "id": "zathura",
+      "name": "Zathura",
+      "category": "terminal",
+      "input": "zathura.zathurarc",
+      "output": "$XDG_CONFIG_HOME/zathura/themes/kaleido",
+      "description": "Zathura theme"
+    },
+    {
+      "id": "niri",
+      "name": "Niri",
+      "category": "compositor",
+      "input": "niri.kdl",
+      "output": "$XDG_CONFIG_HOME/niri/themes/kaleido.kdl",
+      "description": "Niri theme"
+    },
+    {
+      "id": "swaybar",
+      "name": "Swaybar",
+      "category": "system",
+      "input": "swaybar.conf",
+      "output": "$XDG_CONFIG_HOME/swaybar/kaleido",
+      "description": "Swaybar theme"
+    },
+    {
+      "id": "zellij",
+      "name": "Zellij",
+      "category": "terminal",
+      "input": "zellij.kdl",
+      "output": "$XDG_CONFIG_HOME/zellij/themes/kaleido.kdl",
+      "description": "Zellij theme"
     }
   ]
 }
