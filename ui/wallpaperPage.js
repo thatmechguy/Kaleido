@@ -28,11 +28,8 @@ import Gtk from "gi://Gtk";
 import GObject from "gi://GObject";
 import { _ } from "../kaleido.js";
 import GdkPixbuf from "gi://GdkPixbuf";
-import GnomeDesktop from "gi://GnomeDesktop";
+import GnomeDesktop from "gi://GnomeDesktop?version=4.0";
 
-try {
-  imports.gi.versions.GnomeDesktop = "4.0";
-} catch (e) {}
 import {
   rgbToHsl,
   _getRelativeLuminance,

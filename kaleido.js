@@ -108,6 +108,13 @@ export function buildUI(window, settings) {
   toolbarView.add_top_bar(headerBar);
   toolbarView.add_bottom_bar(switcherBar);
 
+  window.add(
+    new Adw.PreferencesPage({
+      title: _("Kaleido"),
+      icon_name: "preferences-system-symbolic",
+    }),
+  );
+
   window.set_content(toolbarView);
 
   const breakpoint = new Adw.Breakpoint({
