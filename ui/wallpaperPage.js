@@ -832,16 +832,21 @@ export class WallpaperPage extends Adw.PreferencesPage {
         throwIfCancelled(cancellable);
 
         if (path && !path.endsWith(".xml")) {
-          const pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-            path,
-            747,
-            420,
-            true,
-          );
-
-          const texture = Gdk.Texture.new_for_pixbuf(pixbuf);
-          if (this._previewPicture) {
-            this._previewPicture.set_paintable(texture);
+          try {
+            const pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
+              path,
+              747,
+              420,
+              true,
+            );
+            const texture = Gdk.Texture.new_for_pixbuf(pixbuf);
+            if (this._previewPicture) {
+              this._previewPicture.set_paintable(texture);
+            }
+          } catch (e) {
+            if (this._previewPicture) {
+              this._previewPicture.set_file(Gio.File.new_for_path(path));
+            }
           }
         }
       } catch (e) {
