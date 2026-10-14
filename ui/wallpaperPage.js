@@ -29,6 +29,10 @@ import GObject from "gi://GObject";
 import { _ } from "../kaleido.js";
 import GdkPixbuf from "gi://GdkPixbuf";
 import GnomeDesktop from "gi://GnomeDesktop";
+
+try {
+  imports.gi.versions.GnomeDesktop = "4.0";
+} catch (e) {}
 import {
   rgbToHsl,
   _getRelativeLuminance,
@@ -763,10 +767,10 @@ export class WallpaperPage extends Adw.PreferencesPage {
         
             if (!thumbnailFactory.can_thumbnail(uri, mimeType, mtime)) return path;
         
-            const pixbuf = thumbnailFactory.generate_thumbnail(uri, mimeType);
+            const pixbuf = await thumbnailFactory.generate_thumbnail_async(uri, mimeType, null);
             if (!pixbuf) return path;
         
-            thumbnailFactory.save_thumbnail(pixbuf, uri, mtime);
+            await thumbnailFactory.save_thumbnail_async(pixbuf, uri, mtime, null);
             thumb = thumbnailFactory.lookup(uri, mtime);
         
             return thumb ?? path;
